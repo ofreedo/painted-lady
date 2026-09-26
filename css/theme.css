@@ -1,0 +1,46 @@
+/* ============================================================
+   THEME: The Painted Lady. Colors sampled from the client's own assets
+   (captured 2026-09-25). This build uses its own layout (css/style.css),
+   not the kit's base.css.
+   ============================================================ */
+
+/* Bodoni Moda: the Didone of fashion mastheads (their bios are mock Vogue covers).
+   Jost: a Futura-style sans for tracked caps + body. Ms Madi: the signature script
+   their bio pages use for names; used only for names and sign-offs. */
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:ital,wght@0,300..600;1,300..500&family=Ms+Madi&display=swap");
+
+:root {
+  /* Pinks */
+  --brand: #ef2761;        /* site title "THE PAINTED LADY TANNING & SPA" (inline color on every page). Large type only: 4.1:1 on white */
+  --lipstick: #c0154a;     /* same hue, deepened so small text passes AA on white (6.1:1) and blush (5:1) */
+  --hot: #ff69b4;          /* their "Book Now" button background */
+  --hot-2: #ff8cc6;        /* hover */
+  --blush: #f6e7e1;        /* storefront stucco (#ecd8cc in the team photo), lifted */
+  --blush-2: #ecd8cc;      /* the stucco itself */
+  --rose: #e0a79b;         /* pink front step in the team photo */
+  --wine: #973749;         /* role titles on every bio page ("PROPRIETRESS", "GLOW GURU") */
+
+  /* Neutrals */
+  --porcelain: #fffaf7;    /* page (their site is white; warmed slightly) */
+  --ink: #1c1418;          /* black-and-white striped awnings, warmed toward the wine */
+  --ink-2: #2a1f24;
+  --text: #2b2226;
+  --muted: #6f6166;
+  --line: rgba(43, 34, 38, .14);
+  --on-dark: #fbf1ec;
+  --on-dark-muted: rgba(251, 241, 236, .7);
+
+  /* Champagne */
+  --gold: #c4a15a;         /* gold "1643" numerals + the gold balloons (#bd970b), softened */
+
+  /* Type */
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+  --script: "Ms Madi", "Snell Roundhand", cursive;
+
+  /* Layout */
+  --wrap: 1240px;
+  --bar-h: 34px;           /* announcement bar */
+  --head-h: 70px;          /* sticky masthead */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
