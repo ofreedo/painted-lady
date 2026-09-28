@@ -22,7 +22,7 @@ It's a static site (HTML, CSS and JavaScript) with no framework and no build ste
 |---|---|
 | `index.html` | Magazine cover, Contents (services index), stats, airbrush feature, the cast covers, VIP Pass, founding story, client review, visit + map |
 | `tanning.html` | Lavish airbrush tans, on-location spray tans, Mystic Tan, the five UV / high-pressure beds, the Cocktails (combos), before & after care |
-| `wellness.html` | Red light therapy (Beauty Angel), infrared sauna (the Zen Den), massage with Logan and Toni, Reiki, Skin Care by Court |
+| `wellness.html` | Red light therapy (Beauty Angel), infrared sauna (the Zen Den), massage with Logan and Toni, Skin Care by Court |
 | `menu.html` | The full price list, with section chips and search |
 | `team.html` | The cast: one magazine-style profile per team member |
 | `guide.html` | The Glow Guide: spray tan FAQ and DHA / FDA facts |
@@ -135,16 +135,18 @@ No reviews, prices or facts were invented.
    The site uses the price page.
 2. **Eyelash extensions** are mentioned on the old homepage, but there's no page or price for them. They're left out.
 3. **VIP Pass** ($1,000/year): is it still offered?
-4. **Sharon's Reiki** comes from the older hidden bio page and a Reiki promo. Her current bio doesn't mention it.
-5. **Adriana Rodriguez and Coral Chavez** are on the GlossGenius team page but have no bios. They're not on the site yet.
-6. **Toni's flyer** says "Serving Fairfield, CA" and lists personal phone numbers. Both are left out; her bookings go through the salon.
-7. **The *Allure* 2012 mention** is about the Lavish Tan product, not the salon. Keep it?
-8. **Old-site problems to clean up** if the Weebly site stays live:
+4. **Adriana Rodriguez and Coral Chavez** are on the GlossGenius team page but have no bios. They're not on the site yet.
+5. **Toni's flyer** says "Serving Fairfield, CA" and lists personal phone numbers. Both are left out; her bookings go through the salon.
+6. **The *Allure* 2012 mention** is about the Lavish Tan product, not the salon. Keep it?
+7. **Old-site problems to clean up** in the Weebly site (now at shop.thepaintedladynapavalley.com):
    - the Massage page shows a stock burger photo;
    - the airbrush page still links an old Schedulicity booking page;
    - several per-session prices are miscalculated;
    - 2021 promotions are still live in the store;
-   - massage promotions say "not valid with Julie", who isn't on the team.
+   - massage promotions say "not valid with Julie", who isn't on the team;
+   - the store still sells "Buy One Reiki Session, Get One Half Off", though Reiki is discontinued.
+
+**Resolved:** Reiki. The salon no longer offers it (2026-09-28), so it was removed from the whole site: the Wellness section, the price list, the home page, and Sharon's and Toni's bios.
 
 ## Credits
 

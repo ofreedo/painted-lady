@@ -115,10 +115,9 @@ window.CAST = [
     inspired: "’60s beach culture with a dash of mountain vibes",
     bio: [
       "As a Napa Native (Napkin), I love being a part of this community and working with the caring team here at the Painted Lady. As an established member of Team Tan I enjoy spray tanning like painting: each client is a beautiful canvas.",
-      "As a Reiki Practitioner/Energy Worker here at The Painted Lady I enjoy bringing peace and healing to those who need it.", // from the older bios.html + Reiki listing ("book with Sharon Bailey")
       "I love music, being outdoors and being in the pool swimming laps.",
     ],
-    tags: ["Spray tanning", "Reiki"],
+    tags: ["Spray tanning"], // Reiki removed 2026-09-28: the salon no longer offers it
   },
   {
     id: "courtney", name: "Courtney Rowe", role: "Radiance Representative", color: "#a3624e",
@@ -147,10 +146,10 @@ window.CAST = [
     inspired: "a deep interest in Egyptian history",
     bio: [
       "Healing is serious business—but that doesn’t mean it can’t feel good. At Goddess Healing Hands, I bring caring hands, good energy, and a whole lot of heart to every session.",
-      "From customized massage and Reiki to compassionate post-op care, my goal is simple: help you hurt less, stress less, and leave feeling a little more like yourself again. Mind, body, spirit—let’s get the whole crew back in alignment.",
+      "From customized massage to compassionate post-op care, my goal is simple: help you hurt less, stress less, and leave feeling a little more like yourself again. Mind, body, spirit—let’s get the whole crew back in alignment.",
       "When I am not working I enjoy listening to music and dancing or spend time with my family bowling.",
     ],
-    tags: ["Massage", "Reiki", "Post-op care"],
+    tags: ["Massage", "Post-op care"], // "and Reiki" removed from the bio 2026-09-28: no longer offered
   },
 ];
 
@@ -268,11 +267,6 @@ window.MENU = [
       ["90-Minute Signature Massage", 130],
       ["2-Hour Signature Massage", "200+"],
     ],
-  },
-  {
-    id: "reiki", title: "Reiki", group: "Wellness", chip: "Reiki",
-    blurb: "Hands-on energy work with Sharon or Toni. By appointment.",
-    items: [["One-Hour Session", 70]],
   },
   {
     id: "skin", title: "Skin Care by Court", group: "Wellness", chip: "Facials",

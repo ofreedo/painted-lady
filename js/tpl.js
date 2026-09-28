@@ -28,7 +28,7 @@
   const nav = S.nav || [], half = Math.ceil(nav.length / 2);
   const SUBS = { // overlay sub-links (in-page anchors)
     "tanning.html": [["Airbrush", "tanning.html#airbrush"], ["Mystic Tan", "tanning.html#mystic"], ["The beds", "tanning.html#beds"], ["Cocktails", "tanning.html#cocktails"]],
-    "wellness.html": [["Red light", "wellness.html#red-light"], ["Sauna", "wellness.html#sauna"], ["Massage", "wellness.html#massage"], ["Reiki", "wellness.html#reiki"], ["Facials", "wellness.html#skin"]],
+    "wellness.html": [["Red light", "wellness.html#red-light"], ["Sauna", "wellness.html#sauna"], ["Massage", "wellness.html#massage"], ["Facials", "wellness.html#skin"]],
   };
 
   $$('[data-chrome="top"]').forEach(slot => {

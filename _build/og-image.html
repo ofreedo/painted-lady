@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- Source for img/og-image.jpg (1200×630 social sharing card). _-prefixed folders are not published by GitHub Pages.
+     Rebuild (from the repo root):
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars --force-device-scale-factor=1 \
+       --window-size=1200,630 --virtual-time-budget=8000 --screenshot=/tmp/og.png "file://$PWD/_build/og-image.html"
+     sips -s format jpeg -s formatOptions 90 /tmp/og.png --out img/og-image.jpg -->
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+    body { background: var(--blush); color: var(--ink); font-family: var(--body); display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+    .frame { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0 54px; text-align: center; }
+    .top { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1.5px solid var(--ink);
+      font: 500 17px/1 var(--body); letter-spacing: .34em; text-transform: uppercase; }
+    .mast { margin: 30px 0 22px; white-space: nowrap; color: var(--brand); text-transform: uppercase;
+      font: 500 109px/.95 var(--display); letter-spacing: .015em; }
+    .issue { padding: 16px 0; border-block: 1.5px solid var(--ink); font: 500 16px/1 var(--body); letter-spacing: .3em; text-transform: uppercase; }
+    .issue span:not(:last-child)::after { content: "✦"; margin: 0 20px; color: var(--brand); letter-spacing: 0; font-size: 12px; }
+    .tag { margin-top: 36px; font: italic 400 46px/1 var(--display); }
+    .tag em { color: var(--brand); }
+    .awning { height: 34px; background: repeating-linear-gradient(90deg, var(--ink) 0 34px, var(--porcelain) 34px 68px); }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top"><span>Tanning &amp; Spa</span><span>Napa Valley</span><span>Est. 2011</span></div>
+    <div class="mast">The Painted Lady</div>
+    <div class="issue"><span>Airbrush</span><span>Mystic</span><span>UV</span><span>Red Light</span><span>Sauna</span><span>Massage</span><span>Facials</span></div>
+    <div class="tag">Dripping in champagne <em>&amp; diamonds.</em></div>
+  </div>
+  <div class="awning"></div>
+</body>
+</html>
