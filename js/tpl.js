@@ -18,6 +18,7 @@
   const directions = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(addrLine);
   const here = location.pathname.split("/").pop() || "index.html";
   const book = S.order || { label: "Book now", url: "#" };
+  const shop = S.shop && S.shop.url ? S.shop : null;
   const socials = Object.entries(S.social || {}).filter(([, u]) => u);
   const cap = s => s[0].toUpperCase() + s.slice(1);
   const pad = n => String(n).padStart(2, "0");
@@ -71,7 +72,8 @@
           <div class="overlay-foot">
             <div><h4>Visit</h4><p>${esc(A.street)}<br>${esc(`${A.city}, ${A.region} ${A.zip}`)}</p><p><a href="${tel}">${esc(S.phone)}</a></p></div>
             <div><h4>Hours</h4><ul class="plain" data-hours-summary></ul></div>
-            <div><h4>Follow</h4><p>${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join("<br>")}</p></div>
+            <div><h4>Follow</h4><p>${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join("<br>")}</p>
+              ${shop ? `<h4 style="margin-top:14px">Shop</h4><p><a href="${esc(shop.url)}"${EXT}>Deals &amp; gift certificates</a></p>` : ""}</div>
           </div>
           <a class="btn btn-hot overlay-book" href="${esc(book.url)}"${EXT}>${esc(book.label)}</a>
         </div>
@@ -89,6 +91,7 @@
             <div class="foot-about">
               <p>${esc(S.footerBlurb || "")}</p>
               <p class="foot-social">${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join(" · ")}</p>
+              ${shop ? `<p><a class="link-arrow" href="${esc(shop.url)}"${EXT}>${esc(shop.label)}</a></p>` : ""}
             </div>
             <div>
               <h4>Visit</h4>
@@ -116,6 +119,7 @@
   /* Fill simple SITE hooks the kit doesn't cover */
   $$("[data-book]").forEach(a => { a.href = book.url; a.target = "_blank"; a.rel = "noopener"; });
   $$("[data-tel]").forEach(a => (a.href = tel)); // tel: link that keeps its own label ([data-phone] replaces the text)
+  $$("[data-shop]").forEach(a => { if (!shop) return void (a.hidden = true); a.href = shop.url; a.target = "_blank"; a.rel = "noopener"; });
   $$("[data-email]").forEach(a => { a.href = "mailto:" + S.email; if (!a.textContent.trim()) a.textContent = S.email; });
   $$("[data-cross]").forEach(el => (el.textContent = S.cross || ""));
   $$("[data-social]").forEach(a => { const u = (S.social || {})[a.dataset.social]; if (!u) return void (a.hidden = true); a.href = u; a.target = "_blank"; a.rel = "noopener"; });

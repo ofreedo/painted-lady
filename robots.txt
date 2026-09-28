@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.thepaintedladynapavalley.com/sitemap.xml

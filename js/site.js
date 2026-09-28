@@ -23,6 +23,8 @@ window.SITE = {
   phone: "707.251.5633",
   email: "alliparx@gmail.com",                 // mailto on their homepage
   order: { label: "Book now", url: BOOK },      // GlossGenius: header button + mobile bar
+  // The Weebly store (deals, VIP Pass, gift certificates) moved to shop. when the main domain went to this site (2026-09-28)
+  shop: { label: "Shop deals & gift certificates", url: "https://shop.thepaintedladynapavalley.com/store/c1/Featured_Products.html" },
   address: { street: "1643 Jefferson Street", city: "Napa", region: "CA", zip: "94559" },
   cross: "Corner of Jefferson & C",              // contact.html: "(the corner of Jefferson & C)"
   timezone: "America/Los_Angeles",
@@ -58,24 +60,24 @@ window.HOURS = {
   sun: [["11:00", "17:00"]],
 };
 
-/* Photos (hotlinked from the client's own hosts; see handoff). */
-const UP = "https://www.thepaintedladynapavalley.com/uploads/2/3/3/9/23398226/";
+/* Photos: all local (with the user's OK), so nothing depends on the old Weebly site.
+   Old source paths are under thepaintedladynapavalley.com/uploads/2/3/3/9/23398226/ */
 window.PHOTOS = {
-  // Local copies (2026-09-28, with the user's OK), resized to 2x their largest display width:
+  // Resized to 2x their largest display width (2026-09-28):
   team:       { src: "img/photos/team.jpg",   // 1400×875 · from their GlossGenius cover image (1728×1080, 2.35 MB)
                 alt: "The Painted Lady team laughing together outside the pink storefront at 1643 Jefferson Street" },
   team14:     { src: "img/photos/team-14.jpg", // 1400×933 · from their homepage, background-images/291416006.jpg (2000×1333, 872 KB)
                 alt: "The Painted Lady team outside the salon holding gold balloons shaped like the number 14" },
   storefront: { src: "img/photos/storefront.jpg", // 989×503 · from contact.html, 1422742983.png (PNG → JPEG, 1.1 MB → 174 KB)
                 alt: "The pink cottage at 1643 Jefferson Street with black-and-white striped awnings and a crepe myrtle in bloom" },
-  // Still hotlinked from the old Weebly site:
-  soltron:    { src: UP + "img-7973_orig.jpg", alt: "The Soltron Wildcat tanning bed, lit blue" },          // 800×1067
-  essence:    { src: UP + "8497607_orig.jpg", alt: "The red Ergoline Essence 48 stand-up tanning booth" }, // 604×800
-  elixir:     { src: UP + "9227117.jpg", alt: "The Dr. Müller Elixir tanning bed, lid open" },           // 547×371
-  solarix:    { src: UP + "solarix_orig.jpg", alt: "The Solarix X2 high-pressure tanning bed" },          // 494×398
-  matrix:     { src: UP + "matrix-2_orig.jpg", alt: "The Matrix high-pressure tanning bed glowing violet" }, // 1100×721
-  beautyAngel:{ src: UP + "9972794_orig.jpg", alt: "The Beauty Angel red light therapy booth" },          // 538×800
-  sauna:      { src: UP + "published/sauna.jpg", alt: "The cedar infrared sauna cabin" },                 // 441×410
+  // Downloaded as-is (2026-09-28), already small:
+  soltron:    { src: "img/photos/soltron.jpg", alt: "The Soltron Wildcat tanning bed, lit blue" },          // 800×1067 · img-7973_orig.jpg
+  essence:    { src: "img/photos/essence.jpg", alt: "The red Ergoline Essence 48 stand-up tanning booth" }, // 604×800 · 8497607_orig.jpg
+  elixir:     { src: "img/photos/elixir.jpg", alt: "The Dr. Müller Elixir tanning bed, lid open" },         // 547×371 · 9227117.jpg
+  solarix:    { src: "img/photos/solarix.jpg", alt: "The Solarix X2 high-pressure tanning bed" },           // 494×398 · solarix_orig.jpg
+  matrix:     { src: "img/photos/matrix.jpg", alt: "The Matrix high-pressure tanning bed glowing violet" }, // 1100×721 · matrix-2_orig.jpg
+  beautyAngel:{ src: "img/photos/beauty-angel.jpg", alt: "The Beauty Angel red light therapy booth" },      // 538×800 · 9972794_orig.jpg
+  sauna:      { src: "img/photos/sauna.jpg", alt: "The cedar infrared sauna cabin" },                       // 441×410 · published/sauna.jpg
 };
 
 /* Team portraits. On the old site each bio page is one image (text + portrait). The portrait
