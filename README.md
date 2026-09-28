@@ -109,13 +109,10 @@ The live site updates in about a minute.
 
 ## Photos
 
-- **Local:** the six team portraits in `img/cast/`. They were cropped out of the old site's bio images, which had the bio text baked in. The original file and pixel box for each are noted in `CAST`.
-- **Still hotlinked**, so they break if those hosts go away:
-  - the team photos, from the Weebly site and the GlossGenius booking site;
-  - the storefront photo, from the Weebly site;
-  - the tanning bed, Beauty Angel and sauna photos, from the Weebly site.
-
-  Download them into `img/` and update `PHOTOS` before the old Weebly site is shut down.
+- **Local:**
+  - the six team portraits in `img/cast/`, cropped out of the old site's bio images, which had the bio text baked in. The original file and pixel box for each are noted in `CAST`;
+  - the two team photos and the storefront in `img/photos/`. The team photos are resized to 1400px wide, twice their largest display width, and the storefront was converted from PNG to JPEG. That took the homepage from about 4.3 MB of photos to about 1.0 MB with no visible difference. Sources are noted in `PHOTOS`.
+- **Still hotlinked** from the old Weebly site, so they break if it goes away: the tanning bed, Beauty Angel and sauna photos (small, 28–172 KB each). Download them into `img/` and update `PHOTOS` before the Weebly site is shut down.
 - **Nice to have:** a short professional shoot (an airbrush tan in progress, the Zen Den, the interior, retail shelves). The bed photos are casual phone shots.
 
 ## Content sources

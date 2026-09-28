@@ -61,12 +61,14 @@ window.HOURS = {
 /* Photos (hotlinked from the client's own hosts; see handoff). */
 const UP = "https://www.thepaintedladynapavalley.com/uploads/2/3/3/9/23398226/";
 window.PHOTOS = {
-  team:       { src: "https://static.glossgenius.com/public/salon/26c13e2994f7dbcafc5f142219eb5913a7c8923c/website_cover_image/97dba67f2f86111e45f5703a9c22ca12.jpeg",
-                alt: "The Painted Lady team laughing together outside the pink storefront at 1643 Jefferson Street" }, // 1728×1080, GlossGenius cover
-  team14:     { src: UP + "background-images/291416006.jpg",
-                alt: "The Painted Lady team outside the salon holding gold balloons shaped like the number 14" }, // 2000×1333, their homepage
-  storefront: { src: UP + "1422742983.png",
-                alt: "The pink cottage at 1643 Jefferson Street with black-and-white striped awnings and a crepe myrtle in bloom" }, // 989×503
+  // Local copies (2026-09-28, with the user's OK), resized to 2x their largest display width:
+  team:       { src: "img/photos/team.jpg",   // 1400×875 · from their GlossGenius cover image (1728×1080, 2.35 MB)
+                alt: "The Painted Lady team laughing together outside the pink storefront at 1643 Jefferson Street" },
+  team14:     { src: "img/photos/team-14.jpg", // 1400×933 · from their homepage, background-images/291416006.jpg (2000×1333, 872 KB)
+                alt: "The Painted Lady team outside the salon holding gold balloons shaped like the number 14" },
+  storefront: { src: "img/photos/storefront.jpg", // 989×503 · from contact.html, 1422742983.png (PNG → JPEG, 1.1 MB → 174 KB)
+                alt: "The pink cottage at 1643 Jefferson Street with black-and-white striped awnings and a crepe myrtle in bloom" },
+  // Still hotlinked from the old Weebly site:
   soltron:    { src: UP + "img-7973_orig.jpg", alt: "The Soltron Wildcat tanning bed, lit blue" },          // 800×1067
   essence:    { src: UP + "8497607_orig.jpg", alt: "The red Ergoline Essence 48 stand-up tanning booth" }, // 604×800
   elixir:     { src: UP + "9227117.jpg", alt: "The Dr. Müller Elixir tanning bed, lid open" },           // 547×371

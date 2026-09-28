@@ -292,7 +292,12 @@
       const spy = new IntersectionObserver(entries => entries.forEach(e => {
         if (!e.isIntersecting) return;
         $$(".chip", chips).forEach(c => c.classList.toggle("active", c.getAttribute("href") === "#" + e.target.id));
-        $(`.chip[href="#${e.target.id}"]`, chips)?.scrollIntoView({ block: "nearest", inline: "nearest" });
+        // Scroll only the chip strip sideways; scrollIntoView() can also nudge the page mid-scroll (jitter)
+        const c = $(`.chip[href="#${e.target.id}"]`, chips);
+        if (c && chips.scrollWidth > chips.clientWidth) {
+          const cr = c.getBoundingClientRect(), sr = chips.getBoundingClientRect();
+          chips.scrollTo({ left: chips.scrollLeft + cr.left - sr.left - (sr.width - cr.width) / 2, behavior: "smooth" });
+        }
       }), { rootMargin: "-160px 0px -65% 0px" });
       $$(".menu-section", menuRoot).forEach(s => spy.observe(s));
     }

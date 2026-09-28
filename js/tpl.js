@@ -109,6 +109,10 @@
       <div class="book-bar"><a href="${tel}">Call</a><a href="${esc(book.url)}"${EXT}>${esc(book.label)}</a></div>`;
   });
 
+  /* Photos decode off the main thread (a big image arriving mid-scroll can't stall a frame).
+     Set before main.js assigns src from PHOTOS. The first photo on a page is the hero: fetch it first. */
+  $$("img[data-photo]").forEach((img, i) => { img.decoding = "async"; if (i === 0 && !img.hasAttribute("loading")) img.fetchPriority = "high"; });
+
   /* Fill simple SITE hooks the kit doesn't cover */
   $$("[data-book]").forEach(a => { a.href = book.url; a.target = "_blank"; a.rel = "noopener"; });
   $$("[data-tel]").forEach(a => (a.href = tel)); // tel: link that keeps its own label ([data-phone] replaces the text)
@@ -155,11 +159,16 @@
   /* ---------- In-page index (.subnav): highlight the section in view ---------- */
   const sub = $(".subnav");
   if (sub && "IntersectionObserver" in window) {
-    const links = $$('a[href^="#"]', sub);
+    const links = $$('a[href^="#"]', sub), strip = $("ol", sub);
     const spy = new IntersectionObserver(es => es.forEach(e => {
       if (!e.isIntersecting) return;
       links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
-      $(".active", sub)?.scrollIntoView({ block: "nearest", inline: "nearest" });
+      // Scroll only the strip sideways. scrollIntoView() also moved the PAGE (24px yank at every section = scroll jitter).
+      const a = $(".active", sub);
+      if (a && strip.scrollWidth > strip.clientWidth) {
+        const ar = a.getBoundingClientRect(), sr = strip.getBoundingClientRect();
+        strip.scrollTo({ left: strip.scrollLeft + ar.left - sr.left - (sr.width - ar.width) / 2, behavior: "smooth" });
+      }
     }), { rootMargin: "-40% 0px -55% 0px" });
     links.forEach(a => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) spy.observe(t); });
   }
