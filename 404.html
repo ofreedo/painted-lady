@@ -27,7 +27,8 @@
         "bios.html": "team.html", "bios1.html": "team.html", "alli.html": "team.html#alli", "alec.html": "team.html#alec",
         "sharon.html": "team.html#sharon", "courtney.html": "team.html#courtney", "logan.html": "team.html#logan", "toni.html": "team.html#toni",
       };
-      if (p.indexOf("store/") === 0 || p === "summerween.html") location.replace(SHOP + path + location.search);
+      // keep ?query and #hash: Weebly checkout routes live in the hash (store/checkout#/payment)
+      if (p.indexOf("store/") === 0 || p === "summerween.html") location.replace(SHOP + path + location.search + location.hash);
       else if (MOVED[p]) location.replace("/" + MOVED[p]);
     })();
   </script>
