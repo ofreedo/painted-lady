@@ -464,6 +464,34 @@ a.cover-card:hover { transform: translateY(-6px); box-shadow: 0 30px 50px -30px 
 .duo blockquote { margin: 22px 0 0; font: italic 400 22px/1.3 var(--display); }
 @media (max-width: 900px) { .duo { grid-template-columns: 1fr; } .duo article { padding: 36px 24px; } }
 
+/* ---------- Shop: deal cards (rendered by tpl.js from js/shop.js) ---------- */
+.shop-group + .shop-group { margin-top: 90px; }
+.tier-head h2 { font-size: clamp(32px, 3.4vw, 46px); }
+.deals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 50px 30px; }
+.deals.four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 24px; }
+.deal { display: flex; flex-direction: column; min-width: 0; }
+/* Store images are a mix of photos and promo graphics with text: letterbox (contain) on blush so nothing is cropped */
+.deal-img { display: block; aspect-ratio: 1 / 1; overflow: hidden; background: var(--blush); }
+.deal-img img { width: 100%; height: 100%; object-fit: contain; transition: transform 1.2s var(--ease); }
+.deal:hover .deal-img img { transform: scale(1.03); }
+.deal-body { display: flex; flex-direction: column; flex: 1; padding-top: 20px; }
+.deal-group { margin: 0 0 10px; font: 500 10px/1 var(--body); letter-spacing: .28em; text-transform: uppercase; color: var(--lipstick); }
+.deal-name { margin: 0 0 10px; font: 400 23px/1.18 var(--display); }
+.deal-name a { text-decoration: none; }
+.deal-name a:hover { color: var(--brand); }
+.deal-desc { margin: 0 0 18px; font-size: 14.5px; line-height: 1.55; color: var(--muted);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.deal-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: auto 0 18px; }
+.deal-price s { font: 400 18px/1 var(--display); color: var(--muted); }
+.deal-price b { font: 400 30px/1 var(--display); color: var(--brand); }
+.deal-price small { align-self: center; padding: 5px 8px 4px; background: var(--hot); color: var(--ink); font: 500 9.5px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; }
+.deal-buy { align-self: flex-start; padding: 15px 24px; }
+.shop-note { margin-top: 70px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.shop-empty { font: italic 400 24px/1.5 var(--display); color: var(--muted); text-align: center; padding: 40px 0; }
+@media (max-width: 1100px) { .deals.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 980px) { .deals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .deals, .deals.four { grid-template-columns: 1fr; gap: 44px; } .deal-img { aspect-ratio: 4 / 3; } }
+
 /* ---------- Team profiles ---------- */
 .profiles { display: grid; gap: 0; }
 .profile { display: grid; grid-template-columns: 5fr 7fr; gap: 90px; align-items: center; padding: 110px 0; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 10px); }

@@ -16,6 +16,7 @@
   <meta property="og:url" content="https://www.thepaintedladynapavalley.com/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23ef2761'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='44' text-anchor='middle' fill='%23fffaf7'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/theme.css">
@@ -167,8 +168,23 @@
         <p class="vip-fetch">So fetch.</p>
         <div class="actions">
           <a class="btn btn-hot" data-tel href="#">Call to join</a>
-          <a class="btn btn-line" data-shop href="#">Buy online</a>
+          <a class="btn btn-line" data-shop-find="vip pass" href="shop.html">Buy online</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Shop the deals (newest deals from the Weebly store, via js/shop.js) ===== -->
+  <section class="sec" id="deals">
+    <div class="wrap">
+      <header class="head center reveal">
+        <p class="eyebrow center">The shop</p>
+        <h2>Shop the <em>deals.</em></h2>
+        <p>The newest packages and specials, straight from our online store.</p>
+      </header>
+      <div class="deals four" data-shop-teaser="4"></div>
+      <div class="actions reveal" style="justify-content:center;margin-top:56px">
+        <a class="btn btn-hot" href="shop.html">See all <span data-shop-count></span> deals</a>
       </div>
     </div>
   </section>
@@ -230,6 +246,7 @@
 <div data-chrome="foot"></div>
 
 <script src="js/site.js"></script>
+<script src="js/shop.js"></script>
 <script src="js/tpl.js"></script>
 <script src="js/main.js"></script>
 </body>

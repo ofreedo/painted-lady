@@ -39,6 +39,7 @@ window.SITE = {
     { label: "The Tan", href: "tanning.html" },
     { label: "Wellness", href: "wellness.html" },
     { label: "Price List", href: "menu.html" },
+    { label: "Shop", href: "shop.html" },
     { label: "The Cast", href: "team.html" },
     { label: "Glow Guide", href: "guide.html" },
     { label: "Visit", href: "visit.html" },

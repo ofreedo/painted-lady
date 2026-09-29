@@ -1,0 +1,17 @@
+<!doctype html>
+<!-- Source for favicon.ico (48px) and img/apple-touch-icon.png (180px). Rebuild from the repo root:
+     C="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+     "$C" --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=180,180 --virtual-time-budget=8000 --screenshot=img/apple-touch-icon.png "file://$PWD/_build/icon.html"
+     sips -z 48 48 img/apple-touch-icon.png --out /tmp/icon48.png && sips -s format ico /tmp/icon48.png --out favicon.ico -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    html, body { margin: 0; width: 180px; height: 180px; overflow: hidden; }
+    body { background: var(--brand); display: grid; place-items: center; }
+    b { font: 500 138px/1 var(--display); color: var(--porcelain); margin-top: 6px; }
+  </style>
+</head>
+<body><b>P</b></body>
+</html>

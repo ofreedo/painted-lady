@@ -20,7 +20,8 @@ It's a static site (HTML, CSS and JavaScript) with no framework and no build ste
 
 | Page | What's on it |
 |---|---|
-| `index.html` | Magazine cover, Contents (services index), stats, airbrush feature, the cast covers, VIP Pass, founding story, client review, visit + map |
+| `index.html` | Magazine cover, Contents (services index), stats, airbrush feature, the cast covers, VIP Pass, the four newest shop deals, founding story, client review, visit + map |
+| `shop.html` | Every live deal from the online store, grouped (memberships & gifts, spray tans, UV, wellness, take-home). Checkout happens in the Weebly store |
 | `tanning.html` | Lavish airbrush tans, on-location spray tans, Mystic Tan, the five UV / high-pressure beds, the Cocktails (combos), before & after care |
 | `wellness.html` | Red light therapy (Beauty Angel), infrared sauna (the Zen Den), massage with Logan and Toni, Skin Care by Court |
 | `menu.html` | The full price list, with section chips and search |
@@ -32,16 +33,19 @@ It's a static site (HTML, CSS and JavaScript) with no framework and no build ste
 
 ```
 painted-lady/
-├── index.html … visit.html   7 pages
+├── index.html … visit.html   8 pages (+ 404.html, which redirects old Weebly addresses)
 ├── css/theme.css             brand tokens: colors (with their sources), fonts
 ├── css/style.css             the whole layout and all components
 ├── js/site.js                ← ALL business facts: contact, hours, prices, team, photos
-├── js/tpl.js                 renders the masthead, menu overlay, footer, cast covers, portrait crops, price lookups
+├── js/shop.js                the store's live deals, GENERATED daily by _build/sync_shop.py (don't edit by hand)
+├── js/tpl.js                 renders the masthead, menu overlay, footer, cast covers, portrait crops, price lookups, shop cards
 ├── js/main.js                shared behaviors from the local-biz starter kit (hours, open-now badge, map, price list, search, JSON-LD)
-└── img/cast/*.jpg            the six team portraits, cropped from the old site's bio images
+├── img/                      photos, team portraits (img/cast), social card (og-image.jpg), home-screen icon
+├── _build/                   sync_shop.py, and the sources for og-image.jpg and the icons (not published)
+└── .github/workflows/        sync-shop.yml: the daily shop sync
 ```
 
-Scripts load in this order on every page: `site.js`, then `tpl.js`, then `main.js`. `tpl.js` must run before `main.js`, because `main.js` fills in hooks that `tpl.js` renders (the open-now badge and hours in the header and footer).
+Scripts load in this order on every page: `site.js`, then (on the home and Shop pages) `shop.js`, then `tpl.js`, then `main.js`. `tpl.js` must run before `main.js`, because `main.js` fills in hooks that `tpl.js` renders (the open-now badge and hours in the header and footer).
 
 ## Editing content
 
@@ -77,6 +81,17 @@ If you rename a menu item, update any `data-price` that points to it. The browse
 | `data-social="instagram"` | Link from `SITE.social` |
 | `data-portrait="alli"` | Team portrait, cropped to fit whatever box it's in |
 | `data-cast="covers"` / `"profiles"` | Team cover cards / full team spreads |
+
+## The Shop and its daily sync
+
+The online store stays on Weebly at **shop.thepaintedladynapavalley.com** (cart, checkout, payments, orders). This site shows the deals in its own style, and every **Get this deal** button opens that item's page in the store.
+
+- **What syncs:** every published product in the store's sitemap that has an Add to Cart button, with its name, sale price, regular price, description and photo. Photos load from the store itself.
+- **When:** daily at 6 am Pacific, via GitHub Actions (`.github/workflows/sync-shop.yml`). To sync right away (say, after adding a deal), go to the repo on GitHub, open **Actions**, then **Sync shop deals**, then **Run workflow**. Or run `python3 _build/sync_shop.py` locally and push.
+- **Changes only when needed:** `js/shop.js` is rewritten, committed and published only when the store's products actually changed.
+- **Excluded or grouped differently:** edit `EXCLUDE` and `GROUPS` at the top of `_build/sync_shop.py`. The Reiki deal is excluded because Reiki is discontinued. Deals listed twice in the store (same name and price) appear once.
+- **If the store can't be read** (Weebly is down, or it changes its page layout and fewer than 5 products parse), nothing is written, the site keeps showing the last good list, and the failed run shows up in GitHub Actions, which emails the repo owner.
+- **What the owner does:** manage deals in Weebly as usual. Ending or hiding a deal there removes it here by the next morning.
 
 ## Design
 
@@ -144,7 +159,12 @@ No reviews, prices or facts were invented.
    - several per-session prices are miscalculated;
    - 2021 promotions are still live in the store;
    - massage promotions say "not valid with Julie", who isn't on the team;
-   - the store still sells "Buy One Reiki Session, Get One Half Off", though Reiki is discontinued.
+   - the store still sells "Buy One Reiki Session, Get One Half Off", though Reiki is discontinued (the new Shop page hides it).
+8. **Store items that now appear on the new Shop page** (they come straight from Weebly, so fix them there):
+   - the VIP Pass photo is a sample pass for a named person ("Holly La Porta, Valid for 2025");
+   - the VIP Pass "regular price" of $8,550 makes its card say "Save 88%";
+   - the $200-for-$100 gift certificate is a holiday special ("now through Christmas") that's still for sale;
+   - "Buy 1 High Pressure Tanning Session, Get **on** Free" has a typo in its name.
 
 **Resolved:** Reiki. The salon no longer offers it (2026-09-28), so it was removed from the whole site: the Wellness section, the price list, the home page, and Sharon's and Toni's bios.
 

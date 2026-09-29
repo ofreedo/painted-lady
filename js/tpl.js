@@ -22,6 +22,12 @@
   const socials = Object.entries(S.social || {}).filter(([, u]) => u);
   const cap = s => s[0].toUpperCase() + s.slice(1);
   const pad = n => String(n).padStart(2, "0");
+  // "$60", "$49.50", "$1,000", "$200+" (a function declaration, so every section below can use it)
+  function fmt(p) {
+    if (p == null) return "";
+    const n = parseFloat(p), plus = /\+$/.test(String(p)) ? "+" : "";
+    return "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + plus;
+  }
 
   /* ---------- Chrome: announcement bar, masthead, menu overlay ---------- */
   const link = n => `<a href="${n.href}"${n.href === here ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`;
@@ -72,8 +78,7 @@
           <div class="overlay-foot">
             <div><h4>Visit</h4><p>${esc(A.street)}<br>${esc(`${A.city}, ${A.region} ${A.zip}`)}</p><p><a href="${tel}">${esc(S.phone)}</a></p></div>
             <div><h4>Hours</h4><ul class="plain" data-hours-summary></ul></div>
-            <div><h4>Follow</h4><p>${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join("<br>")}</p>
-              ${shop ? `<h4 style="margin-top:14px">Shop</h4><p><a href="${esc(shop.url)}"${EXT}>Deals &amp; gift certificates</a></p>` : ""}</div>
+            <div><h4>Follow</h4><p>${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join("<br>")}</p></div>
           </div>
           <a class="btn btn-hot overlay-book" href="${esc(book.url)}"${EXT}>${esc(book.label)}</a>
         </div>
@@ -91,7 +96,7 @@
             <div class="foot-about">
               <p>${esc(S.footerBlurb || "")}</p>
               <p class="foot-social">${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join(" · ")}</p>
-              ${shop ? `<p><a class="link-arrow" href="${esc(shop.url)}"${EXT}>${esc(shop.label)}</a></p>` : ""}
+              ${shop ? `<p><a class="link-arrow" href="shop.html">${esc(shop.label)}</a></p>` : ""}
             </div>
             <div>
               <h4>Visit</h4>
@@ -119,8 +124,59 @@
   /* Fill simple SITE hooks the kit doesn't cover */
   $$("[data-book]").forEach(a => { a.href = book.url; a.target = "_blank"; a.rel = "noopener"; });
   $$("[data-tel]").forEach(a => (a.href = tel)); // tel: link that keeps its own label ([data-phone] replaces the text)
-  $$("[data-shop]").forEach(a => { if (!shop) return void (a.hidden = true); a.href = shop.url; a.target = "_blank"; a.rel = "noopener"; });
+  $$("[data-shop]").forEach(a => (a.href = "shop.html"));
   $$("[data-email]").forEach(a => { a.href = "mailto:" + S.email; if (!a.textContent.trim()) a.textContent = S.email; });
+
+  /* ---------- Shop: deals from window.SHOP (js/shop.js, synced daily from the Weebly store by _build/sync_shop.py) ----------
+     Checkout stays on the Weebly store: every card links to that item's page there.
+     [data-shop-grid]        every deal, one section per group
+     [data-shop-index]       <ol> of group links (the Shop page's sticky index)
+     [data-shop-teaser="4"]  the newest N deals, memberships excluded (home page)
+     [data-shop-count]       number of deals · [data-shop-synced] date of the last sync
+     [data-shop-find="vip pass"]  href → the first deal whose name matches (falls back to shop.html) */
+  const SH = window.SHOP && Array.isArray(window.SHOP.items) ? window.SHOP : { items: [], groups: [] };
+  const slug = s => "g-" + s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+  const lastWordEm = s => { const w = esc(s).split(" "); return w.length > 1 ? `${w.slice(0, -1).join(" ")} <em>${w.at(-1)}</em>` : `<em>${w[0]}</em>`; };
+  const deal = i => `
+    <article class="deal reveal">
+      <a class="deal-img" href="${esc(i.url)}" tabindex="-1" aria-hidden="true"><img src="${esc(i.img)}" alt="" loading="lazy" decoding="async"></a>
+      <div class="deal-body">
+        <p class="deal-group">${esc(i.group)}</p>
+        <h3 class="deal-name"><a href="${esc(i.url)}">${esc(i.name)}</a></h3>
+        ${i.desc ? `<p class="deal-desc">${esc(i.desc)}</p>` : ""}
+        <p class="deal-price">${i.was ? `<s aria-label="Regular price ${fmt(i.was)}">${fmt(i.was)}</s>` : ""}<b>${fmt(i.price)}</b>${i.was ? `<small>Save ${Math.round((1 - i.price / i.was) * 100)}%</small>` : ""}</p>
+        <a class="btn btn-ink deal-buy" href="${esc(i.url)}">Get this deal</a>
+      </div>
+    </article>`;
+  const groups = (SH.groups || []).filter(g => SH.items.some(i => i.group === g));
+  $$("[data-shop-grid]").forEach(root => {
+    root.innerHTML = SH.items.length ? groups.map(g => {
+      const list = SH.items.filter(i => i.group === g);
+      return `<section class="shop-group" id="${slug(g)}" aria-labelledby="${slug(g)}-h">
+        <div class="tier-head"><h2 id="${slug(g)}-h">${lastWordEm(g)}</h2><p>${list.length} ${list.length === 1 ? "deal" : "deals"}</p></div>
+        <div class="deals">${list.map(deal).join("")}</div>
+      </section>`;
+    }).join("") : `<p class="shop-empty">Our deals are taking a quick break from this page. See them all in our <a href="${esc((S.shop || {}).url || "#")}">online store</a>, or call <a href="${tel}">${esc(S.phone)}</a>.</p>`;
+  });
+  $$("[data-shop-index]").forEach(ol => {
+    if (!groups.length) return void (ol.closest("nav").hidden = true);
+    ol.innerHTML = groups.map((g, k) => `<li><a href="#${slug(g)}"><small>${pad(k + 1)}</small>${esc(g)}</a></li>`).join("");
+  });
+  $$("[data-shop-teaser]").forEach(root => {
+    const list = SH.items.filter(i => !/membership|gift/i.test(i.group)).sort((a, b) => b.id - a.id).slice(0, +root.dataset.shopTeaser || 4);
+    if (!list.length) return void (root.closest("section").hidden = true);
+    root.innerHTML = list.map(deal).join("");
+  });
+  $$("[data-shop-count]").forEach(el => (el.textContent = SH.items.length));
+  $$("[data-shop-synced]").forEach(el => {
+    const d = SH.synced && new Date(SH.synced.replace(/Z$/, ":00Z"));
+    el.textContent = d && !isNaN(d) ? d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
+    if (!el.textContent) el.closest("[data-shop-synced-wrap]")?.setAttribute("hidden", "");
+  });
+  $$("[data-shop-find]").forEach(a => {
+    const re = new RegExp(a.dataset.shopFind, "i"), hit = SH.items.find(i => re.test(i.name));
+    a.href = hit ? hit.url : "shop.html";
+  });
   $$("[data-cross]").forEach(el => (el.textContent = S.cross || ""));
   $$("[data-social]").forEach(a => { const u = (S.social || {})[a.dataset.social]; if (!u) return void (a.hidden = true); a.href = u; a.target = "_blank"; a.rel = "noopener"; });
 
@@ -229,11 +285,6 @@
   else portraits.forEach(crop);
 
   /* ---------- Prices from MENU (so page copy never drifts from the price list) ---------- */
-  const fmt = p => {
-    if (p == null) return "";
-    const n = parseFloat(p), plus = /\+$/.test(String(p)) ? "+" : "";
-    return "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + plus;
-  };
   const section = id => MENU.find(s => s.id === id);
   $$("[data-price]").forEach(el => {
     const [id, name] = el.dataset.price.split(":");
