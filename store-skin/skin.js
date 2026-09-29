@@ -7,6 +7,9 @@
    - prices: every deal shows its regular price; only the VIP Pass (tagged here for skin.css) shows its sale. */
 (function () {
   if (window.__tplSkin) return; window.__tplSkin = true;
+  /* Weebly prints Header Code BEFORE its theme CSS, so the theme would win every tie: move skin.css last (already cached, no refetch) */
+  var css = document.querySelector('link[href*="store-skin/skin.css"]');
+  if (css) document.head.appendChild(css);
   var WWW = "https://www.thepaintedladynapavalley.com/";
   var BOOK = "https://thepaintedladynapavalley.glossgenius.com/";
   var TEL = "tel:+17072515633", PHONE = "707.251.5633";
