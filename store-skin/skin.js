@@ -69,9 +69,16 @@
     "</div>";
   document.body.insertBefore(top, document.body.firstChild);
 
-  /* Weebly's Cart link: moved (not copied) so its live count and mini cart keep working */
-  var cart = document.querySelector("#navigation .wsite-nav-cart, .wsite-nav-cart");
-  if (cart) top.querySelector(".tpl-cart").appendChild(cart);
+  /* Weebly's Cart link: moved (not copied) so its live count and mini cart keep working.
+     Weebly (re)builds its menu after this script runs, so keep moving it back when it reappears (capped, in case of a tug-of-war). */
+  var slot = top.querySelector(".tpl-cart"), moves = 0;
+  var placeCart = function () {
+    var c = document.querySelector(".wsite-nav-cart");
+    if (c && c.parentNode !== slot && moves++ < 30) slot.appendChild(c);
+  };
+  placeCart();
+  if (window.MutationObserver) new MutationObserver(placeCart).observe(document.body, { childList: true, subtree: true });
+  window.addEventListener("load", placeCart);
 
   /* Phone menu */
   var btn = top.querySelector(".tpl-menu-btn"), ov = top.querySelector(".tpl-overlay");
