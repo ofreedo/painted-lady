@@ -141,7 +141,7 @@ body.tpl-locked { overflow: hidden; }
 #wsite-com-store .wsite-com-category-product-wrap:not(.tpl-sale) .single-sale-price .wsite-com-price { text-decoration: none !important; color: var(--tpl-lipstick) !important; font-weight: 500 !important; margin-right: 0; }
 html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price-sale,
 html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price-range { display: none !important; }
-html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price { display: block !important; }
+html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price { display: block !important; text-decoration: none !important; opacity: 1 !important; } /* Weebly strikes + fades the container, not the number */
 html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price .wsite-com-product-price-amount { text-decoration: none !important; color: var(--tpl-lipstick) !important; font-weight: 500 !important; }
 
 /* ---------- Product blocks placed on ordinary pages (e.g. summerween.html) ---------- */
