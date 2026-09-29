@@ -31,7 +31,10 @@
 
   /* ---------- Chrome: announcement bar, masthead, menu overlay ---------- */
   const link = n => `<a href="${n.href}"${n.href === here ? ' aria-current="page"' : ""}>${esc(n.label)}</a>`;
-  const nav = S.nav || [], half = Math.ceil(nav.length / 2);
+  const shopOn = !!S.shopDeals; // SITE.shopDeals: on-site Shop switched on?
+  const shopHref = shopOn ? "shop.html" : (S.shop || {}).url || "#";
+  const shopExt = shopOn ? "" : EXT;
+  const nav = (S.nav || []).filter(n => shopOn || n.href !== "shop.html"), half = Math.ceil(nav.length / 2);
   const SUBS = { // overlay sub-links (in-page anchors)
     "tanning.html": [["Airbrush", "tanning.html#airbrush"], ["Mystic Tan", "tanning.html#mystic"], ["The beds", "tanning.html#beds"], ["Cocktails", "tanning.html#cocktails"]],
     "wellness.html": [["Red light", "wellness.html#red-light"], ["Sauna", "wellness.html#sauna"], ["Massage", "wellness.html#massage"], ["Facials", "wellness.html#skin"]],
@@ -96,7 +99,7 @@
             <div class="foot-about">
               <p>${esc(S.footerBlurb || "")}</p>
               <p class="foot-social">${socials.map(([k, u]) => `<a href="${esc(u)}"${EXT}>${cap(k)}</a>`).join(" · ")}</p>
-              ${shop ? `<p><a class="link-arrow" href="shop.html">${esc(shop.label)}</a></p>` : ""}
+              ${shop ? `<p><a class="link-arrow" href="${esc(shopHref)}"${shopExt}>${esc(shop.label)}</a></p>` : ""}
             </div>
             <div>
               <h4>Visit</h4>
@@ -124,7 +127,7 @@
   /* Fill simple SITE hooks the kit doesn't cover */
   $$("[data-book]").forEach(a => { a.href = book.url; a.target = "_blank"; a.rel = "noopener"; });
   $$("[data-tel]").forEach(a => (a.href = tel)); // tel: link that keeps its own label ([data-phone] replaces the text)
-  $$("[data-shop]").forEach(a => (a.href = "shop.html"));
+  $$("[data-shop]").forEach(a => { a.href = shopHref; if (!shopOn) { a.target = "_blank"; a.rel = "noopener"; } });
   $$("[data-email]").forEach(a => { a.href = "mailto:" + S.email; if (!a.textContent.trim()) a.textContent = S.email; });
 
   /* ---------- Shop: deals from window.SHOP (js/shop.js, synced daily from the Weebly store by _build/sync_shop.py) ----------
@@ -163,6 +166,7 @@
     ol.innerHTML = groups.map((g, k) => `<li><a href="#${slug(g)}"><small>${pad(k + 1)}</small>${esc(g)}</a></li>`).join("");
   });
   $$("[data-shop-teaser]").forEach(root => {
+    if (!shopOn) return void (root.closest("section").hidden = true);
     const list = SH.items.filter(i => !/membership|gift/i.test(i.group)).sort((a, b) => b.id - a.id).slice(0, +root.dataset.shopTeaser || 4);
     if (!list.length) return void (root.closest("section").hidden = true);
     root.innerHTML = list.map(deal).join("");
@@ -175,7 +179,7 @@
   });
   $$("[data-shop-find]").forEach(a => {
     const re = new RegExp(a.dataset.shopFind, "i"), hit = SH.items.find(i => re.test(i.name));
-    a.href = hit ? hit.url : "shop.html";
+    a.href = hit ? hit.url : shopHref;
   });
   $$("[data-cross]").forEach(el => (el.textContent = S.cross || ""));
   $$("[data-social]").forEach(a => { const u = (S.social || {})[a.dataset.social]; if (!u) return void (a.hidden = true); a.href = u; a.target = "_blank"; a.rel = "noopener"; });

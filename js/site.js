@@ -25,6 +25,10 @@ window.SITE = {
   order: { label: "Book now", url: BOOK },      // GlossGenius: header button + mobile bar
   // The Weebly store (deals, VIP Pass, gift certificates) moved to shop. when the main domain went to this site (2026-09-28)
   shop: { label: "Shop deals & gift certificates", url: "https://shop.thepaintedladynapavalley.com/store/c1/Featured_Products.html" },
+  // On/off switch for the on-site Shop (shop.html + home "Shop the deals" section). While false, the Shop is
+  // left out of the menus and home page, and shop links go straight to the Weebly store. shop.html still
+  // works by direct link (for previewing with the owner). Also re-add shop.html to sitemap.xml when turning on.
+  shopDeals: false,
   address: { street: "1643 Jefferson Street", city: "Napa", region: "CA", zip: "94559" },
   cross: "Corner of Jefferson & C",              // contact.html: "(the corner of Jefferson & C)"
   timezone: "America/Los_Angeles",

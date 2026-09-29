@@ -84,6 +84,8 @@ If you rename a menu item, update any `data-price` that points to it. The browse
 
 ## The Shop and its daily sync
 
+> **Currently switched OFF** (`shopDeals: false` in `js/site.js`, 2026-09-28) until the owner wants deals on the site. While off, the Shop is left out of the menus and the home page, and shop links go straight to the Weebly store; `shop.html` still works by direct link for previewing. **To turn it on:** set `shopDeals: true`, remove the `noindex` meta tag from `shop.html`, add `shop.html` back to `sitemap.xml`, and turn on the daily sync (the workflow file needs a GitHub token with the `workflow` permission).
+
 The online store stays on Weebly at **shop.thepaintedladynapavalley.com** (cart, checkout, payments, orders). This site shows the deals in its own style, and every **Get this deal** button opens that item's page in the store.
 
 - **What syncs:** every published product in the store's sitemap that has an Add to Cart button, with its name, sale price, regular price, description and photo. Photos load from the store itself.
