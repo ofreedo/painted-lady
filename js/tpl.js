@@ -137,10 +137,17 @@
      [data-shop-teaser="4"]  the newest N deals, memberships excluded (home page)
      [data-shop-count]       number of deals · [data-shop-synced] date of the last sync
      [data-shop-find="vip pass"]  href → the first deal whose name matches (falls back to shop.html) */
-  const SH = window.SHOP && Array.isArray(window.SHOP.items) ? window.SHOP : { items: [], groups: [] };
+  const nameRe = s => new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/ /g, "\\s*"), "i");
+  const saleNames = (S.shopShowSale || []).map(nameRe), onlyNames = (S.shopOnly || []).map(nameRe);
+  const imgFor = Object.entries(S.shopImages || {}).map(([n, src]) => [nameRe(n), src]);
+  const RAW = window.SHOP && Array.isArray(window.SHOP.items) ? window.SHOP : { items: [], groups: [] };
+  const SH = { ...RAW, items: RAW.items // SITE.shopOnly narrows the list; SITE.shopImages swaps in our own photos
+    .filter(i => !onlyNames.length || onlyNames.some(re => re.test(i.name)))
+    .map(i => { const own = imgFor.find(([re]) => re.test(i.name)); return own ? { ...i, img: own[1] } : i; }) };
+  const shopOnlyMode = onlyNames.length > 0;
+  document.body.classList.toggle("shop-only", shopOnlyMode);
   const slug = s => "g-" + s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
   const lastWordEm = s => { const w = esc(s).split(" "); return w.length > 1 ? `${w.slice(0, -1).join(" ")} <em>${w.at(-1)}</em>` : `<em>${w[0]}</em>`; };
-  const saleNames = (S.shopShowSale || []).map(s => new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
   const deal = i => { // regular price only, unless the deal is listed in SITE.shopShowSale
     const was = i.was && saleNames.some(re => re.test(i.name)) ? i.was : null, price = was ? i.price : i.was || i.price; return `
     <article class="deal reveal">
@@ -174,6 +181,7 @@
     root.innerHTML = list.map(deal).join("");
   });
   $$("[data-shop-count]").forEach(el => (el.textContent = SH.items.length));
+  if (shopOnlyMode) $$("[data-shop-only]").forEach(el => (el.innerHTML = el.dataset.shopOnly)); // alternate headline/lede (our own HTML)
   $$("[data-shop-synced]").forEach(el => {
     const d = SH.synced && new Date(SH.synced.replace(/Z$/, ":00Z"));
     el.textContent = d && !isNaN(d) ? d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";

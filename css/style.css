@@ -492,6 +492,24 @@ a.cover-card:hover { transform: translateY(-6px); box-shadow: 0 30px 50px -30px 
 @media (max-width: 980px) { .deals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .deals, .deals.four { grid-template-columns: 1fr; gap: 44px; } .deal-img { aspect-ratio: 4 / 3; } }
 
+/* Shop-only mode (SITE.shopOnly, body.shop-only): a single deal shown as a feature, pass beside its details */
+.shop-only [data-shop-hide-only] { display: none !important; }
+.shop-only .tier-head { display: none; }
+.shop-only .deals { grid-template-columns: 1fr; max-width: 1000px; margin-inline: auto; }
+.shop-only .deal { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 64px; align-items: center; }
+.shop-only .deal-img { aspect-ratio: 971 / 1619; background: none; box-shadow: 0 30px 60px -34px rgba(28, 20, 24, .55); }
+.shop-only .deal-img img { object-fit: cover; }
+.shop-only .deal-body { padding-top: 0; }
+.shop-only .deal-name { font-size: clamp(38px, 4.4vw, 60px); line-height: 1.02; margin-bottom: 18px; }
+.shop-only .deal-desc { display: block; overflow: visible; font-size: 17px; line-height: 1.65; margin-bottom: 28px; }
+.shop-only .deal-price { margin: 0 0 26px; }
+.shop-only .deal-price b { font-size: 44px; }
+.shop-only .deal-buy { padding: 18px 30px; }
+@media (max-width: 780px) {
+  .shop-only .deal { grid-template-columns: 1fr; gap: 34px; }
+  .shop-only .deal-img { width: min(100%, 360px); margin-inline: auto; }
+}
+
 /* ---------- Team profiles ---------- */
 .profiles { display: grid; gap: 0; }
 .profile { display: grid; grid-template-columns: 5fr 7fr; gap: 90px; align-items: center; padding: 110px 0; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--head-h) + 10px); }

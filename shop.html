@@ -25,13 +25,14 @@
   <header class="page-head">
     <div class="wrap">
       <p class="eyebrow center rise" style="--d:.1s">The Shop</p>
-      <h1 class="rise" style="--d:.2s">Shop the <em>deals.</em></h1>
-      <p class="page-lede rise" style="--d:.35s">Tan packages, wellness deals, the VIP Pass, gift certificates and take-home favorites. Choose a deal, then add it to your cart and check out in our online store.</p>
-      <p class="rise" style="--d:.5s;margin-top:22px;font-size:13.5px;color:var(--muted)" data-shop-synced-wrap><span data-shop-count></span> deals · updated <span data-shop-synced></span></p>
+      <!-- data-shop-only: replaces the text while SITE.shopOnly narrows the Shop to a few deals (see js/site.js) -->
+      <h1 class="rise" style="--d:.2s" data-shop-only="The VIP &lt;em&gt;Pass.&lt;/em&gt;">Shop the <em>deals.</em></h1>
+      <p class="page-lede rise" style="--d:.35s" data-shop-only="A whole year of unlimited glow, for one price. Add it to your cart and check out in our online store. Seasonal deals return for our sales and Black Friday.">Tan packages, wellness deals, the VIP Pass, gift certificates and take-home favorites. Choose a deal, then add it to your cart and check out in our online store.</p>
+      <p class="rise" style="--d:.5s;margin-top:22px;font-size:13.5px;color:var(--muted)" data-shop-synced-wrap data-shop-hide-only><span data-shop-count></span> deals · updated <span data-shop-synced></span></p>
     </div>
   </header>
 
-  <nav class="subnav" aria-label="Deal categories">
+  <nav class="subnav" aria-label="Deal categories" data-shop-hide-only>
     <ol data-shop-index></ol>
   </nav>
 

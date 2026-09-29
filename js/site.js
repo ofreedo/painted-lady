@@ -32,6 +32,11 @@ window.SITE = {
   // Shop cards show one price: the store's REGULAR price (the one Weebly strikes through). Only deals whose name
   // matches one of these show the sale instead: regular struck through, sale price, "Save %" (owner's call, 2026-09-29).
   shopShowSale: ["VIP Pass"],
+  // Show ONLY these deals on the site (owner, 2026-09-29: just the VIP Pass until the next sale / Black Friday).
+  // Empty the list ([]) to show every deal from the store again. The Weebly store itself is unaffected.
+  shopOnly: ["VIP Pass"],
+  // Our own photo for a deal instead of the store's (matched by name, like shopShowSale)
+  shopImages: { "VIP Pass": "img/shop/vip-pass-2026.jpg" },
   address: { street: "1643 Jefferson Street", city: "Napa", region: "CA", zip: "94559" },
   cross: "Corner of Jefferson & C",              // contact.html: "(the corner of Jefferson & C)"
   timezone: "America/Los_Angeles",

@@ -94,6 +94,8 @@ The old Weebly site's page addresses (`/uv.html`, `/prices.html`, `/alli.html` a
 
 > **On/off switch:** `shopDeals` in `js/site.js` (on). Set it to `false` to take the Shop out of the menus and the home page (shop links then go straight to the Weebly store); also add a `noindex` meta tag to `shop.html` and remove it from `sitemap.xml`.
 >
+> **Only some deals (current setting):** `shopOnly` in `js/site.js` limits the Shop to the deals it names. It's set to just the VIP Pass (owner, 2026-09-29) until the next sale or Black Friday. The Shop page then shows that one deal as a feature, and the home page's deals section hides itself. Set it to `[]` to show every deal again. The Weebly store still lists everything. `shopImages` swaps in our own photo for a deal (the 2026 VIP Pass card is `img/shop/vip-pass-2026.jpg`).
+>
 > **Prices:** each card shows one price, the store's **regular** price (the one Weebly strikes through). Only deals named in `shopShowSale` (currently the VIP Pass) show the sale: regular price struck through, the sale price, and a "Save %" tag. The store skin (`store-skin/`) follows the same rule. Checkout charges whatever price is set on the product in Weebly, so a deal with a sale price there still checks out at that sale price.
 >
 > **The daily sync isn't on yet:** pushing the workflow file needs a GitHub token with the `workflow` permission. Until then, refresh the deals by running `python3 _build/sync_shop.py` and pushing.
