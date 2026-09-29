@@ -43,7 +43,9 @@ painted-lady/
 ├── js/tpl.js                 renders the masthead, menu overlay, footer, cast covers, portrait crops, price lookups, shop cards
 ├── js/main.js                shared behaviors from the local-biz starter kit (hours, open-now badge, map, price list, search, JSON-LD)
 ├── img/                      photos, team portraits (img/cast), social card (og-image.jpg), home-screen icon
-├── _build/                   sync_shop.py, and the sources for og-image.jpg and the icons (not published)
+├── store-skin/               the Weebly store's look (skin.css + skin.js), linked from Weebly's Header/Footer Code
+├── _build/                   sync_shop.py, build_redirects.py, and the sources for og-image.jpg and the icons (not published)
+├── _weebly/                  how the store skin is installed, plus a backup of the store before the restyle (not published)
 └── .github/workflows/        sync-shop.yml: the daily shop sync
 ```
 
@@ -92,11 +94,11 @@ The old Weebly site's page addresses (`/uv.html`, `/prices.html`, `/alli.html` a
 
 > **On/off switch:** `shopDeals` in `js/site.js` (on). Set it to `false` to take the Shop out of the menus and the home page (shop links then go straight to the Weebly store); also add a `noindex` meta tag to `shop.html` and remove it from `sitemap.xml`.
 >
-> **Prices:** each card shows one price, what the store charges at checkout. Only deals named in `shopShowSale` (currently the VIP Pass) also show the store's regular price struck through and a "Save %" tag.
+> **Prices:** each card shows one price, the store's **regular** price (the one Weebly strikes through). Only deals named in `shopShowSale` (currently the VIP Pass) show the sale: regular price struck through, the sale price, and a "Save %" tag. The store skin (`store-skin/`) follows the same rule. Checkout charges whatever price is set on the product in Weebly, so a deal with a sale price there still checks out at that sale price.
 >
 > **The daily sync isn't on yet:** pushing the workflow file needs a GitHub token with the `workflow` permission. Until then, refresh the deals by running `python3 _build/sync_shop.py` and pushing.
 
-The online store stays on Weebly at **shop.thepaintedladynapavalley.com** (cart, checkout, payments, orders). This site shows the deals in its own style, and every **Get this deal** button opens that item's page in the store.
+The online store stays on Weebly at **shop.thepaintedladynapavalley.com** (cart, checkout, payments, orders). This site shows the deals in its own style, and every **Get this deal** button opens that item's page in the store. The store itself wears this site's masthead, colors and type through `store-skin/`; see `_weebly/README.md`.
 
 - **What syncs:** every published product in the store's sitemap that has an Add to Cart button, with its name, sale price, regular price, description and photo. Photos load from the store itself.
 - **When:** daily at 6 am Pacific, via GitHub Actions (`.github/workflows/sync-shop.yml`). To sync right away (say, after adding a deal), go to the repo on GitHub, open **Actions**, then **Sync shop deals**, then **Run workflow**. Or run `python3 _build/sync_shop.py` locally and push.

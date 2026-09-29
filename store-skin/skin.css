@@ -1,0 +1,178 @@
+/* ============================================================
+   THE PAINTED LADY: skin for the Weebly store (shop.thepaintedladynapavalley.com).
+   Served from this site and linked from Weebly → Settings → SEO → Header Code (see _weebly/README.md),
+   so the Weebly theme itself stays untouched: clear that box (and Footer Code) to undo everything.
+   Colors + type match the main site (css/theme.css). skin.js swaps in the
+   masthead + footer; this file restyles Weebly's own store markup.
+   ============================================================ */
+:root {
+  --tpl-brand: #ef2761; --tpl-lipstick: #c0154a; --tpl-hot: #ff69b4; --tpl-blush: #f6e7e1; --tpl-blush-2: #ecd8cc;
+  --tpl-porcelain: #fffaf7; --tpl-ink: #1c1418; --tpl-text: #2b2226; --tpl-muted: #6f6166; --tpl-line: rgba(43, 34, 38, .14);
+  --tpl-on-dark: #fbf1ec; --tpl-on-dark-muted: rgba(251, 241, 236, .7);
+  --tpl-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --tpl-body: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+  --tpl-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ---------- Base: Weebly's grey Raleway theme → porcelain, Jost, ink ---------- */
+html body, body.wsite-theme-light { background: var(--tpl-porcelain) !important; color: var(--tpl-text); font: 400 16px/1.7 var(--tpl-body); }
+.body-wrap, .bg-wrapper, #wrapper, #content-wrapper { background: var(--tpl-porcelain) !important; box-shadow: none !important; }
+body a { color: var(--tpl-lipstick); }
+body a:hover { color: var(--tpl-brand); }
+body h2, #wsite-com-store h2, html body #wsite-com-product-info h2.product-title { font: 400 clamp(30px, 3.6vw, 46px)/1.08 var(--tpl-display) !important; letter-spacing: -.01em; color: var(--tpl-ink) !important; }
+body .paragraph, body p { color: var(--tpl-text); font-family: var(--tpl-body); }
+::selection { background: var(--tpl-hot); color: var(--tpl-ink); }
+:focus-visible { outline: 2px solid var(--tpl-lipstick); outline-offset: 3px; }
+.container { width: min(100% - 56px, 1240px) !important; min-width: 0 !important; margin: 0 auto !important; padding: 56px 0 80px !important; }
+@media (max-width: 640px) { .container { padding: 32px 0 56px !important; } }
+
+/* Weebly's own header, menu and mobile slide-out: replaced by skin.js (hidden only once it has run) */
+html.tpl-on #header, html.tpl-on #navigation, html.tpl-on .navmobile-wrapper, html.tpl-on .nav-trigger, html.tpl-on #footer { display: none !important; }
+html.tpl-on #wrapper { padding-top: 0 !important; left: 0 !important; }
+
+/* ---------- Masthead (built by skin.js) ---------- */
+.tpl-top { display: contents; } /* so the sticky masthead sticks to the page, not to this wrapper */
+.tpl-skip { position: absolute; left: -999px; top: 8px; z-index: 400; background: var(--tpl-ink); color: var(--tpl-on-dark) !important; padding: 10px 16px; }
+.tpl-skip:focus { left: 8px; }
+.tpl-wrap { width: min(100% - 56px, 1240px); margin-inline: auto; }
+.tpl-announce { background: var(--tpl-ink); color: var(--tpl-on-dark-muted); font: 400 12px/1 var(--tpl-body); letter-spacing: .1em; }
+.tpl-announce .tpl-wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 34px; }
+.tpl-announce-mid { font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--tpl-on-dark); }
+.tpl-announce a { color: var(--tpl-on-dark) !important; text-decoration: none; }
+.tpl-announce a:hover { color: var(--tpl-hot) !important; }
+.tpl-mast { position: sticky; top: 0; z-index: 100; background: var(--tpl-porcelain); border-bottom: 1px solid var(--tpl-line); }
+.tpl-mast-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 28px; height: 70px; }
+.tpl-mast-l, .tpl-mast-r { display: flex; align-items: center; gap: 26px; min-width: 0; }
+.tpl-mast-r { justify-content: flex-end; }
+.tpl-nav { display: flex; align-items: center; gap: 26px; }
+.tpl-nav a, .tpl-cart a, .tpl-menu-btn { position: relative; padding: 8px 0; font: 500 11px/1 var(--tpl-body) !important; letter-spacing: .24em; text-transform: uppercase; text-decoration: none; color: var(--tpl-text) !important; white-space: nowrap; background: none !important; }
+.tpl-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 1px; height: 1px; background: var(--tpl-lipstick); transition: right .4s var(--tpl-ease); }
+.tpl-nav a:hover::after, .tpl-nav a[aria-current="page"]::after { right: 0; }
+.tpl-nav a[aria-current="page"] { color: var(--tpl-lipstick) !important; }
+.tpl-cart { list-style: none; margin: 0; padding: 0; display: flex; }
+.tpl-cart li { display: block !important; position: static !important; background: none !important; }
+.tpl-cart a { display: inline-flex !important; align-items: center; min-height: 44px; }
+.tpl-cart a:hover { color: var(--tpl-lipstick) !important; }
+.tpl-wordmark { display: flex; flex-direction: column; align-items: center; text-align: center; line-height: 1; text-decoration: none !important; }
+.tpl-wm-main { font: 500 23px/1 var(--tpl-display); letter-spacing: .16em; text-transform: uppercase; color: var(--tpl-brand); white-space: nowrap; margin-right: -.16em; }
+.tpl-wm-sub { margin-top: 8px; font: 400 9px/1 var(--tpl-body); letter-spacing: .44em; text-transform: uppercase; color: var(--tpl-muted); white-space: nowrap; margin-right: -.44em; }
+.tpl-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 20px; border: 0; border-radius: 0; background: var(--tpl-hot); color: var(--tpl-ink) !important;
+  font: 500 10.5px/1 var(--tpl-body); letter-spacing: .26em; text-transform: uppercase; text-decoration: none !important; white-space: nowrap; transition: background .3s, color .3s; }
+.tpl-btn:hover { background: var(--tpl-ink); color: var(--tpl-hot) !important; }
+.tpl-menu-btn { display: none; align-items: center; gap: 12px; min-width: 44px; min-height: 44px; border: 0; cursor: pointer; }
+.tpl-burger { position: relative; width: 24px; height: 9px; }
+.tpl-burger i { position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; }
+.tpl-burger i:first-child { top: 0; } .tpl-burger i:last-child { bottom: 0; right: 7px; }
+.tpl-awning { height: 10px; background: repeating-linear-gradient(90deg, var(--tpl-ink) 0 18px, var(--tpl-porcelain) 18px 36px); }
+
+/* Page title band under the masthead: "The Shop" + a way back to the deals on the main site */
+.tpl-band { background: var(--tpl-blush); border-bottom: 1px solid var(--tpl-line); }
+.tpl-band .tpl-wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 22px 0; }
+.tpl-band p { margin: 0; font: 500 11px/1.4 var(--tpl-body); letter-spacing: .3em; text-transform: uppercase; color: var(--tpl-lipstick); }
+.tpl-band a { font: 500 11px/1 var(--tpl-body); letter-spacing: .24em; text-transform: uppercase; text-decoration: none; color: var(--tpl-ink) !important; border-bottom: 1px solid currentColor; padding-bottom: 5px; }
+.tpl-band a:hover { color: var(--tpl-lipstick) !important; }
+
+/* Phone menu */
+.tpl-overlay { position: fixed; inset: 0; z-index: 300; overflow-y: auto; background: var(--tpl-blush); padding: 0 24px 34px; }
+.tpl-overlay[hidden] { display: none; }
+.tpl-overlay-top { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.tpl-overlay-top .tpl-wm-main { font-size: 17px; }
+.tpl-overlay ol { list-style: none; margin: 10px 0 30px; padding: 0; border-top: 1px solid var(--tpl-line); }
+.tpl-overlay li { padding: 12px 0; border-bottom: 1px solid var(--tpl-line); }
+.tpl-overlay li a { display: flex; align-items: baseline; gap: 16px; text-decoration: none; color: var(--tpl-ink) !important; font: 400 clamp(30px, 8vw, 44px)/1.1 var(--tpl-display); }
+.tpl-overlay li a:hover { font-style: italic; color: var(--tpl-brand) !important; }
+.tpl-overlay small { min-width: 22px; font: 500 11px/1 var(--tpl-body); letter-spacing: .18em; color: var(--tpl-lipstick); font-style: normal; }
+.tpl-overlay-close { background: none; border: 0; cursor: pointer; min-height: 44px; color: var(--tpl-text); font: 500 11px/1 var(--tpl-body); letter-spacing: .26em; text-transform: uppercase; }
+body.tpl-locked { overflow: hidden; }
+
+@media (max-width: 1300px) { .tpl-nav { display: none; } .tpl-menu-btn { display: inline-flex; } } /* the store's extra Cart link needs a little more room than the main site (1260) */
+@media (max-width: 640px) {
+  .tpl-mast-row { height: 62px; gap: 12px; }
+  .tpl-mast-r .tpl-btn, .tpl-menu-label, .tpl-announce-mid { display: none; }
+  .tpl-wm-main { font-size: 16px; letter-spacing: .12em; margin-right: -.12em; }
+  .tpl-wm-sub { font-size: 7.5px; letter-spacing: .34em; margin-top: 6px; }
+  .tpl-wrap, .container { width: calc(100% - 36px) !important; }
+  .tpl-band .tpl-wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+/* ---------- Footer (built by skin.js) ---------- */
+.tpl-foot { background: var(--tpl-ink); color: var(--tpl-on-dark-muted); font: 400 14.5px/1.7 var(--tpl-body); }
+.tpl-foot .tpl-wrap { padding: 64px 0 40px; }
+.tpl-foot .tpl-foot-mark { margin: 0 0 40px; text-align: center; font: 500 clamp(30px, 6vw, 76px)/1 var(--tpl-display); letter-spacing: .04em; text-transform: uppercase; color: var(--tpl-brand); white-space: nowrap; overflow: hidden; }
+.tpl-foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
+.tpl-foot h4 { margin: 0 0 12px; font: 500 10.5px/1 var(--tpl-body); letter-spacing: .3em; text-transform: uppercase; color: var(--tpl-hot); }
+.tpl-foot p { margin: 0 0 8px; color: var(--tpl-on-dark-muted); }
+.tpl-foot ul { list-style: none; margin: 0; padding: 0; }
+.tpl-foot a { color: var(--tpl-on-dark) !important; text-decoration: none; }
+.tpl-foot a:hover { color: var(--tpl-hot) !important; }
+.tpl-foot-base { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 48px; padding-top: 22px; border-top: 1px solid rgba(251, 241, 236, .16); font-size: 12.5px; }
+@media (max-width: 860px) { .tpl-foot-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .tpl-foot-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Store: category grid ---------- */
+/* Weebly pins every column to a JS-measured height (which clips taller cards): a CSS grid sizes them instead */
+#wsite-com-store .wsite-com-category-product-group, #wsite-com-store .wsite-com-category-product-featured-group { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 28px; margin: 0 !important; }
+#wsite-com-store .wsite-com-category-product-group::before, #wsite-com-store .wsite-com-category-product-group::after,
+#wsite-com-store .wsite-com-category-product-featured-group::before, #wsite-com-store .wsite-com-category-product-featured-group::after { display: none !important; }
+#wsite-com-store .wsite-com-category-product-group .wsite-com-column, #wsite-com-store .wsite-com-category-product-featured-group .wsite-com-column { width: auto !important; height: auto !important; float: none !important; margin: 0 !important; padding: 0 !important; }
+@media (max-width: 992px) { #wsite-com-store .wsite-com-category-product-group, #wsite-com-store .wsite-com-category-product-featured-group { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+#wsite-com-store .wsite-com-category-product-wrap { display: flex; flex-direction: column; height: 100%; margin: 0 !important; background: #fff; border: 1px solid var(--tpl-line); transition: border-color .3s, box-shadow .3s; }
+#wsite-com-store .wsite-com-category-product-wrap:hover { border-color: var(--tpl-ink); box-shadow: 0 18px 36px -26px rgba(28, 20, 24, .5); }
+#wsite-com-store .wsite-com-category-product-image-container { background: var(--tpl-blush); }
+#wsite-com-store .wsite-com-category-product-name { padding: 18px 18px 6px; font: 400 20px/1.2 var(--tpl-display) !important; color: var(--tpl-ink) !important; text-align: left; }
+#wsite-com-store .wsite-com-category-product-link:hover .wsite-com-category-product-name { font-style: italic; color: var(--tpl-brand) !important; }
+#wsite-com-store .wsite-com-product-price { margin-top: auto; padding: 0 18px 20px; text-align: left; }
+#wsite-com-store .wsite-com-category-product-price { display: inline-block; font: 500 17px/1 var(--tpl-body) !important; letter-spacing: .04em; color: var(--tpl-lipstick) !important; }
+#wsite-com-store .wsite-com-category-product-price.wsite-com-price { color: var(--tpl-muted) !important; font-weight: 400 !important; margin-right: 10px; }
+@media (max-width: 640px) {
+  #wsite-com-store .wsite-com-category-product-name { font-size: 16px !important; padding: 14px 12px 4px; }
+  #wsite-com-store .wsite-com-product-price { padding: 0 12px 14px; }
+  #wsite-com-store .wsite-com-category-product-price { font-size: 15px !important; }
+}
+/* Stale banner in the Featured Products category description ("Cyber Monday: up to 70% off everything"). Delete it in Weebly, then drop this rule */
+#wsite-com-store .wsite-image:has(img[src*="cyber-monday"]) { display: none !important; }
+#wsite-com-hierarchy a, #wsite-com-store #wsite-com-hierarchy ul li { font: 500 11px/1.4 var(--tpl-body) !important; letter-spacing: .24em; text-transform: uppercase; color: var(--tpl-text) !important; }
+#wsite-com-hierarchy .wsite-selected { color: var(--tpl-lipstick) !important; }
+
+/* Prices: the owner shows each deal's REGULAR price (the one Weebly strikes through), except the VIP Pass,
+   which keeps its sale (regular struck, sale price). skin.js tags VIP Pass cards/pages with .tpl-sale.
+   Checkout still charges whatever price Weebly has on the product. */
+#wsite-com-store .wsite-com-category-product-wrap:not(.tpl-sale) .single-sale-price .wsite-com-sale-price { display: none !important; }
+#wsite-com-store .wsite-com-category-product-wrap:not(.tpl-sale) .single-sale-price .wsite-com-price { text-decoration: none !important; color: var(--tpl-lipstick) !important; font-weight: 500 !important; margin-right: 0; }
+html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price-sale,
+html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price-range { display: none !important; }
+html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price { display: block !important; }
+html:not(.tpl-sale-page) #wsite-com-product-price-area.wsite-com-product-show-price-on-sale #wsite-com-product-price .wsite-com-product-price-amount { text-decoration: none !important; color: var(--tpl-lipstick) !important; font-weight: 500 !important; }
+
+/* ---------- Product blocks placed on ordinary pages (e.g. summerween.html) ---------- */
+html body .product-grid__title, html body .product-grid__title .product-grid-reset { font: 400 22px/1.2 var(--tpl-display) !important; color: var(--tpl-ink) !important; letter-spacing: 0; }
+.product-grid__price { font: 500 17px/1.2 var(--tpl-body) !important; letter-spacing: .04em; color: var(--tpl-lipstick) !important; }
+.product-grid__sale { color: var(--tpl-muted) !important; font-weight: 400; margin-right: 8px; } /* regular price; skin.js keeps only it on non-VIP blocks */
+.product-grid__description, .product-grid__description p { color: var(--tpl-text) !important; font: 400 15px/1.6 var(--tpl-body) !important; }
+
+/* ---------- Store: product page ---------- */
+#wsite-com-product-images .wsite-com-product-images-main-image, #wsite-com-product-images #cloudzoom-wrap { background: var(--tpl-blush); }
+#wsite-com-product-info .product-title { margin-bottom: 14px !important; }
+#wsite-com-product-price-area { margin: 0 0 18px; }
+#wsite-com-product-price-area .wsite-com-product-price-amount { font: 500 26px/1 var(--tpl-body) !important; letter-spacing: .02em; color: var(--tpl-lipstick) !important; }
+#wsite-com-product-price .wsite-com-product-price-amount { color: var(--tpl-muted) !important; font-weight: 400 !important; }
+#wsite-com-product-per-item { font: 500 10.5px/1 var(--tpl-body); letter-spacing: .24em; text-transform: uppercase; color: var(--tpl-muted); }
+#wsite-com-product-short-description, #wsite-com-product-short-description .paragraph { font-size: 16.5px !important; line-height: 1.7 !important; color: var(--tpl-text) !important; }
+#wsite-com-product-social-sharing { display: none !important; } /* Twitter + Google+ buttons from 2013 */
+.wsite-com-product-title, .wsite-com-product-label b { font: 500 10.5px/1 var(--tpl-body) !important; letter-spacing: .24em; text-transform: uppercase; color: var(--tpl-muted); }
+#wsite-com-product-sku.wsite-com-product-sku-none { display: none !important; }
+
+/* ---------- Buttons, inputs (Add to Cart, Checkout, coupon) ---------- */
+body .wsite-button, body .wsite-button-highlight, body .wsite-button-normal { background: var(--tpl-ink) !important; border: 0 !important; border-radius: 0 !important; padding: 18px 30px !important; box-shadow: none !important; transition: background .3s; }
+body .wsite-button:hover, body .wsite-button-highlight:hover { background: var(--tpl-lipstick) !important; }
+body .wsite-button .wsite-button-inner { background: none !important; color: var(--tpl-on-dark) !important; font: 500 11.5px/1 var(--tpl-body) !important; letter-spacing: .26em; text-transform: uppercase; }
+body .wsite-input, body .wsite-form-input, body .wsite-form-field select, body .wsite-com-product-option select { border: 1px solid var(--tpl-line) !important; border-radius: 0 !important; background-color: #fff; font: 400 15px var(--tpl-body) !important; color: var(--tpl-text); }
+body .wsite-input:focus, body .wsite-form-input:focus { border-color: var(--tpl-lipstick) !important; }
+
+/* ---------- Mini cart ---------- */
+#wsite-mini-cart { border: 1px solid var(--tpl-ink) !important; border-radius: 0 !important; background: var(--tpl-porcelain) !important; box-shadow: 0 24px 48px -30px rgba(28, 20, 24, .6) !important; font-family: var(--tpl-body) !important; color: var(--tpl-text); z-index: 250 !important; }
+#wsite-mini-cart:before, #wsite-mini-cart:after { display: none !important; }
+#wsite-mini-cart .wsite-product-image { border: 0 !important; background: var(--tpl-blush); }
+
+/* ---------- Checkout (same stylesheet reaches the cart summary) ---------- */
+#wsite-com-checkout-list th, #wsite-com-checkout-summary-list th { font: 500 10.5px/1 var(--tpl-body) !important; letter-spacing: .24em; text-transform: uppercase; color: var(--tpl-muted) !important; }

@@ -29,8 +29,8 @@ window.SITE = {
   // left out of the menus and home page, and shop links go straight to the Weebly store. shop.html still
   // works by direct link (for previewing with the owner). Also re-add shop.html to sitemap.xml when turning on.
   shopDeals: true,
-  // Shop cards show one price: what the store charges at checkout. Only deals whose name matches one of these
-  // also show the store's regular price struck through and a "Save %" tag (owner's call, 2026-09-28).
+  // Shop cards show one price: the store's REGULAR price (the one Weebly strikes through). Only deals whose name
+  // matches one of these show the sale instead: regular struck through, sale price, "Save %" (owner's call, 2026-09-29).
   shopShowSale: ["VIP Pass"],
   address: { street: "1643 Jefferson Street", city: "Napa", region: "CA", zip: "94559" },
   cross: "Corner of Jefferson & C",              // contact.html: "(the corner of Jefferson & C)"

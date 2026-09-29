@@ -141,14 +141,15 @@
   const slug = s => "g-" + s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
   const lastWordEm = s => { const w = esc(s).split(" "); return w.length > 1 ? `${w.slice(0, -1).join(" ")} <em>${w.at(-1)}</em>` : `<em>${w[0]}</em>`; };
   const saleNames = (S.shopShowSale || []).map(s => new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
-  const deal = i => { const was = i.was && saleNames.some(re => re.test(i.name)) ? i.was : null; return `
+  const deal = i => { // regular price only, unless the deal is listed in SITE.shopShowSale
+    const was = i.was && saleNames.some(re => re.test(i.name)) ? i.was : null, price = was ? i.price : i.was || i.price; return `
     <article class="deal reveal">
       <a class="deal-img" href="${esc(i.url)}" tabindex="-1" aria-hidden="true"><img src="${esc(i.img)}" alt="" loading="lazy" decoding="async"></a>
       <div class="deal-body">
         <p class="deal-group">${esc(i.group)}</p>
         <h3 class="deal-name"><a href="${esc(i.url)}">${esc(i.name)}</a></h3>
         ${i.desc ? `<p class="deal-desc">${esc(i.desc)}</p>` : ""}
-        <p class="deal-price">${was ? `<s aria-label="Regular price ${fmt(was)}">${fmt(was)}</s>` : ""}<b>${fmt(i.price)}</b>${was ? `<small>Save ${Math.round((1 - i.price / was) * 100)}%</small>` : ""}</p>
+        <p class="deal-price">${was ? `<s aria-label="Regular price ${fmt(was)}">${fmt(was)}</s>` : ""}<b>${fmt(price)}</b>${was ? `<small>Save ${Math.round((1 - price / was) * 100)}%</small>` : ""}</p>
         <a class="btn btn-ink deal-buy" href="${esc(i.url)}">Get this deal</a>
       </div>
     </article>`; };
