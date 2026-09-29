@@ -84,7 +84,11 @@ If you rename a menu item, update any `data-price` that points to it. The browse
 
 ## The Shop and its daily sync
 
-> **Currently switched OFF** (`shopDeals: false` in `js/site.js`, 2026-09-28) until the owner wants deals on the site. While off, the Shop is left out of the menus and the home page, and shop links go straight to the Weebly store; `shop.html` still works by direct link for previewing. **To turn it on:** set `shopDeals: true`, remove the `noindex` meta tag from `shop.html`, add `shop.html` back to `sitemap.xml`, and turn on the daily sync (the workflow file needs a GitHub token with the `workflow` permission).
+> **On/off switch:** `shopDeals` in `js/site.js` (on). Set it to `false` to take the Shop out of the menus and the home page (shop links then go straight to the Weebly store); also add a `noindex` meta tag to `shop.html` and remove it from `sitemap.xml`.
+>
+> **Prices:** each card shows one price, what the store charges at checkout. Only deals named in `shopShowSale` (currently the VIP Pass) also show the store's regular price struck through and a "Save %" tag.
+>
+> **The daily sync isn't on yet:** pushing the workflow file needs a GitHub token with the `workflow` permission. Until then, refresh the deals by running `python3 _build/sync_shop.py` and pushing.
 
 The online store stays on Weebly at **shop.thepaintedladynapavalley.com** (cart, checkout, payments, orders). This site shows the deals in its own style, and every **Get this deal** button opens that item's page in the store.
 
@@ -164,7 +168,6 @@ No reviews, prices or facts were invented.
    - the store still sells "Buy One Reiki Session, Get One Half Off", though Reiki is discontinued (the new Shop page hides it).
 8. **Store items that now appear on the new Shop page** (they come straight from Weebly, so fix them there):
    - the VIP Pass photo is a sample pass for a named person ("Holly La Porta, Valid for 2025");
-   - the VIP Pass "regular price" of $8,550 makes its card say "Save 88%";
    - the $200-for-$100 gift certificate is a holiday special ("now through Christmas") that's still for sale;
    - "Buy 1 High Pressure Tanning Session, Get **on** Free" has a typo in its name.
 
